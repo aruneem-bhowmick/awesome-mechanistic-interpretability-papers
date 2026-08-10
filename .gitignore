@@ -1,2 +1,6 @@
 # Meta-documentation files
 meta/
+
+# Python bytecode
+__pycache__/
+*.pyc
