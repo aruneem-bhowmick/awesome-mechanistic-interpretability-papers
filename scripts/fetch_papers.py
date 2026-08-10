@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pull recent arXiv papers per README section into PAPER_INBOX.md for manual triage.
+"""Pull recent arXiv papers per README section into PAPER-INBOX.md for manual triage.
 
 Curation stays manual (see CONTRIBUTING.md) — this script only surfaces candidates.
 """
@@ -20,7 +20,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 ROOT = Path(__file__).resolve().parent.parent
 README_PATH = ROOT / "README.md"
-INBOX_PATH = ROOT / "PAPER_INBOX.md"
+INBOX_PATH = ROOT / "PAPER-INBOX.md"
 SEEN_IDS_PATH = Path(__file__).resolve().parent / "seen_arxiv_ids.txt"
 
 ARXIV_API = "http://export.arxiv.org/api/query"
@@ -110,7 +110,7 @@ def parse_args():
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Print candidates without writing PAPER_INBOX.md or updating the seen-ids log.",
+        help="Print candidates without writing PAPER-INBOX.md or updating the seen-ids log.",
     )
     return parser.parse_args()
 
