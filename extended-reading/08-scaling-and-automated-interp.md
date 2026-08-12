@@ -1,0 +1,13 @@
+# Extended Reading — 8. Scaling Interpretability & Automated Interp
+
+Papers judged on-topic and reasonably solid, but that didn't make `README.md`'s curated top-10 for this section — usually because they're recent, unreviewed preprints without a track record yet, cover narrower/more applied ground than the core list, or fit §3's Superposition & SAEs theme better than this one's automation/scaling focus. See [`../CONTRIBUTING.md`](../CONTRIBUTING.md) for how the split against the main table works. Promote an entry to `README.md` if it proves out.
+
+| Paper | Authors | Year | Note |
+|---|---|---|---|
+| [Descriptive Collision in Sparse Autoencoder Auto-Interpretability: When One Explanation Describes Many Features](https://arxiv.org/abs/2605.12874) | McCann | 2026 | A specific, rigorous critique of autointerp reliability; overlaps with Pitfalls in Evaluating Interpretability Agents (README.md) at a narrower scope. |
+| [From Heads to Neurons: Causal Attribution and Steering in Multi-Task Vision-Language Models](https://arxiv.org/abs/2604.17941) | Wang, Hu, Jiang | 2026 | Extends causal attribution/steering methodology to multi-task VLMs; solid but a narrower domain than the picks in README.md. |
+| [MetaSAEs: Joint Training with a Decomposability Penalty Produces More Atomic Sparse Autoencoder Latents](https://arxiv.org/abs/2604.03436) | Levinson | 2026 | An SAE-training-methodology paper; arguably a better fit for §3's extended reading than this section's automation/scaling focus. |
+| [CLT-Forge: A Scalable Library for Cross-Layer Transcoders and Attribution Graphs](https://arxiv.org/abs/2603.21014) | Draye, Palit, Harrasse, Wu, Liu, et al. | 2026 | A tooling/library paper rather than a research finding — arguably belongs alongside TransformerLens/CircuitsVis in §11 once vetted. |
+| [Stable and Steerable Sparse Autoencoders with Weight Regularization](https://arxiv.org/abs/2603.04198) | Jedryszek, Crook | 2026 | Another SAE-training-methodology paper better suited to §3's extended reading. |
+| [Data-Centric Interpretability for LLM-based Multi-Agent Reinforcement Learning](https://arxiv.org/abs/2602.05183) | Yan, Yu, Sun, Duffy, Marques, et al. | 2026 | Applies SAE-based interpretability tooling to multi-agent RL training dynamics; interesting but a niche domain relative to the core list. |
+| [MechRL: Reinforcement Learning Agents Perform Circuit Discovery for Mechanistic Interpretability](https://arxiv.org/abs/2605.26343) | Khadka | 2026 | Automates circuit discovery via RL agents; single-author and thematically overlaps with the automation papers already in README.md. |

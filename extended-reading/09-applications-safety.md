@@ -1,0 +1,17 @@
+# Extended Reading — 9. Applications: Safety, Steering, Unlearning
+
+Papers judged on-topic and reasonably solid, but that didn't make `README.md`'s curated top-10 for this section — mostly machine-unlearning technique papers that are solid but didn't distinguish themselves from each other enough to all warrant a core slot. See [`../CONTRIBUTING.md`](../CONTRIBUTING.md) for how the split against the main table works. Promote an entry to `README.md` if it proves out.
+
+| Paper | Authors | Year | Note |
+|---|---|---|---|
+| [GROM: Gradient-Free Rapid One-Shot Machine Unlearning](https://arxiv.org/abs/2608.05783) | Batorski, Spurek, Swoboda | 2026 | A gradient-free one-shot unlearning technique; solid but one of several similarly-scoped unlearning method papers this round. |
+| [Leak-Resistant Unlearning: A New Benchmark for Evaluating Multi-Hop Reasoning Consistency and Recovery Robustness](https://arxiv.org/abs/2608.04519) | Qian, Zhang, Huang, Hong, Qiu | 2026 | A benchmark/eval paper for multi-hop unlearning leakage; useful infrastructure, narrower than RepBench (README.md). |
+| [Trajectory-Guided Forget-Recover Network for Continual LLM Unlearning](https://arxiv.org/abs/2608.03123) | Wu, Cheng, Zhang, Luo, Wang, et al. | 2026 | A continual-unlearning technique addressing sequential forget requests; solid, incremental. |
+| [Exploring and Bridging Knowledge Holes in Unlearned Multimodal Large Language Models](https://arxiv.org/abs/2608.01849) | You, Chen, He, Liu, Guo, et al. | 2026 | Studies unlearning precision in MLLMs specifically; narrower domain than the core picks. |
+| [QR-Erase: Efficient Subspace-Based Machine Unlearning with Layer Localization](https://arxiv.org/abs/2608.01422) | Lizzo, Heck | 2026 | A methodologically distinct (QR-decomposition, subspace-based) unlearning technique; competes with several other technique papers for a limited number of slots. |
+| [Generated Images Are Easier to Forget: A Machine Unlearning Perspective for Synthetic Image Detection](https://arxiv.org/abs/2608.00716) | Nie, Zhang, Liu, Cheung, Han, et al. | 2026 | Uses unlearning as a tool for a different goal (synthetic image detection) rather than studying unlearning itself. |
+| [Similarity-Aware Machine Unlearning](https://arxiv.org/abs/2608.00246) | Kumaran, Unni, Kouni, Harikumar | 2026 | A localization-efficiency improvement for unlearning; solid, incremental relative to the explanatory pick in README.md. |
+| [Beyond Binary Rewards: A Comparative Study of Reward Design for Reinforcement Unlearning](https://arxiv.org/abs/2607.27968) | Zaradoukas, Gabrielli, Prenkaj, Kasneci | 2026 | Compares reward designs for RL-based unlearning; a useful ablation study rather than a new finding. |
+| [Understanding Machine Unlearning Through the Lens of Mode Connectivity](https://arxiv.org/abs/2607.23970) | Cheng, Amiri | 2026 | A theoretical (loss-landscape) account of unlearning, overlapping in spirit with Gradient Concentration (README.md) but at a different level of analysis. |
+| [DECAF: De-Clustering for Adaptive Representational Unlearning](https://arxiv.org/abs/2607.23934) | Le, Peng, Guo, Noble | 2026 | A representational-clustering unlearning technique; solid, one of several similarly-scoped entries this round. |
+| [Toward Fine-Grained Forgetting: Attribute Unlearning for Multimodal Large Language Models](https://arxiv.org/abs/2608.01008) | Lin, Chen, Hou, He, Liu, et al. | 2026 | Attribute-level (rather than whole-fact) unlearning for MLLMs; narrower scope than the core picks. |
