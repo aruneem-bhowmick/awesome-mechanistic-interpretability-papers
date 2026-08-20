@@ -48,7 +48,8 @@ SECTION_QUERIES = {
     "04-representation-geometry": (
         "Representation Geometry & Linear Structure",
         'abs:"linear representation hypothesis" OR abs:"representation geometry" '
-        'OR abs:"emergent world representation" OR abs:"linear probe"',
+        'OR abs:"emergent world representation" '
+        'OR (abs:"linear probe" AND (abs:"language model" OR abs:"neural network"))',
     ),
     "05-causal-methods": (
         "Causal Methods: Patching, Ablation, Editing",
@@ -62,12 +63,14 @@ SECTION_QUERIES = {
     ),
     "07-training-dynamics-and-grokking": (
         "Training Dynamics & Grokking",
-        'abs:"grokking"',
+        'abs:"grokking" AND (abs:"generalization" OR abs:"training dynamics" '
+        'OR abs:"double descent" OR abs:"modular arithmetic" OR abs:"phase transition")',
     ),
     "08-scaling-and-automated-interp": (
         "Scaling Interpretability & Automated Interp",
-        'abs:"automated interpretability" OR abs:"autointerp" OR abs:"neuron explanation" '
-        'OR abs:"scaling interpretability"',
+        '(abs:"automated interpretability" OR abs:"scaling interpretability") '
+        'AND (abs:"language model" OR abs:"neural network" OR abs:"transformer") '
+        'OR abs:"autointerp" OR abs:"neuron explanation"',
     ),
     "09-applications-safety": (
         "Applications: Safety, Steering, Unlearning",
