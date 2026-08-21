@@ -38,18 +38,20 @@ REQUEST_DELAY_SECONDS = 3
 SECTION_QUERIES = {
     "02-circuits-and-features": (
         "Circuits & Features",
-        'abs:"circuit discovery" OR abs:"circuit analysis" OR abs:"attention circuit"',
+        'abs:"circuit discovery" OR abs:"attention circuit" '
+        'OR (abs:"circuit analysis" AND abs:"interpretability")',
     ),
     "03-superposition-and-saes": (
         "Superposition & Sparse Autoencoders",
-        'abs:"sparse autoencoder" OR abs:"dictionary learning" '
+        'abs:"sparse autoencoder" '
+        'OR (abs:"dictionary learning" AND (abs:"language model" OR abs:"interpretability")) '
         'OR (abs:"superposition" AND (abs:"neural network" OR abs:"language model" OR abs:"feature"))',
     ),
     "04-representation-geometry": (
         "Representation Geometry & Linear Structure",
         'abs:"linear representation hypothesis" OR abs:"representation geometry" '
         'OR abs:"emergent world representation" '
-        'OR (abs:"linear probe" AND (abs:"language model" OR abs:"neural network"))',
+        'OR (abs:"linear probe" AND abs:"interpretability")',
     ),
     "05-causal-methods": (
         "Causal Methods: Patching, Ablation, Editing",
@@ -85,6 +87,40 @@ SECTION_QUERIES = {
 # strings server-side, so sections whose noise didn't improve after tightening
 # the query re-check the actual returned abstract text here before accepting.
 SECTION_POST_FILTERS = {
+    "02-circuits-and-features": lambda abstract: (
+        "circuit discovery" in abstract
+        or "attention circuit" in abstract
+        or ("circuit analysis" in abstract and "interpretability" in abstract)
+    ),
+    "03-superposition-and-saes": lambda abstract: (
+        "sparse autoencoder" in abstract
+        or (
+            "dictionary learning" in abstract
+            and any(term in abstract for term in ("language model", "interpretability"))
+        )
+        or (
+            "superposition" in abstract
+            and any(
+                term in abstract
+                for term in ("neural network", "language model", "feature")
+            )
+        )
+    ),
+    "04-representation-geometry": lambda abstract: (
+        "linear representation hypothesis" in abstract
+        or "representation geometry" in abstract
+        or "emergent world representation" in abstract
+        or ("linear probe" in abstract and "interpretability" in abstract)
+    ),
+    "05-causal-methods": lambda abstract: any(
+        term in abstract
+        for term in (
+            "activation patching",
+            "causal tracing",
+            "activation steering",
+            "model editing",
+        )
+    ),
     "07-training-dynamics-and-grokking": lambda abstract: (
         "grokking" in abstract
         and any(
