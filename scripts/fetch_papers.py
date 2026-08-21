@@ -43,7 +43,8 @@ SECTION_QUERIES = {
     ),
     "03-superposition-and-saes": (
         "Superposition & Sparse Autoencoders",
-        'abs:"sparse autoencoder" OR abs:"dictionary learning" '
+        'abs:"sparse autoencoder" '
+        'OR (abs:"dictionary learning" AND (abs:"language model" OR abs:"interpretability")) '
         'OR (abs:"superposition" AND (abs:"neural network" OR abs:"language model" OR abs:"feature"))',
     ),
     "04-representation-geometry": (
@@ -90,6 +91,20 @@ SECTION_POST_FILTERS = {
         "circuit discovery" in abstract
         or "attention circuit" in abstract
         or ("circuit analysis" in abstract and "interpretability" in abstract)
+    ),
+    "03-superposition-and-saes": lambda abstract: (
+        "sparse autoencoder" in abstract
+        or (
+            "dictionary learning" in abstract
+            and any(term in abstract for term in ("language model", "interpretability"))
+        )
+        or (
+            "superposition" in abstract
+            and any(
+                term in abstract
+                for term in ("neural network", "language model", "feature")
+            )
+        )
     ),
     "07-training-dynamics-and-grokking": lambda abstract: (
         "grokking" in abstract
