@@ -112,6 +112,15 @@ SECTION_POST_FILTERS = {
         or "emergent world representation" in abstract
         or ("linear probe" in abstract and "interpretability" in abstract)
     ),
+    "05-causal-methods": lambda abstract: any(
+        term in abstract
+        for term in (
+            "activation patching",
+            "causal tracing",
+            "activation steering",
+            "model editing",
+        )
+    ),
     "07-training-dynamics-and-grokking": lambda abstract: (
         "grokking" in abstract
         and any(
