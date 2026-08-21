@@ -79,6 +79,42 @@ SECTION_QUERIES = {
     ),
 }
 
+# Client-side literal-phrase confirmation, keyed like SECTION_QUERIES. arXiv's
+# legacy export.arxiv.org/api/query endpoint has been observed (issue #3) not to
+# reliably enforce phrase co-occurrence for multi-clause AND/OR search_query
+# strings server-side, so sections whose noise didn't improve after tightening
+# the query re-check the actual returned abstract text here before accepting.
+SECTION_POST_FILTERS = {
+    "07-training-dynamics-and-grokking": lambda abstract: (
+        "grokking" in abstract
+        and any(
+            term in abstract
+            for term in (
+                "generalization",
+                "training dynamic",
+                "double descent",
+                "modular arithmetic",
+                "phase transition",
+            )
+        )
+    ),
+    "08-scaling-and-automated-interp": lambda abstract: (
+        any(
+            term in abstract
+            for term in (
+                "automated interpretability",
+                "scaling interpretability",
+                "autointerp",
+                "neuron explanation",
+            )
+        )
+        and any(
+            term in abstract
+            for term in ("language model", "neural network", "transformer")
+        )
+    ),
+}
+
 DEFAULT_PREAMBLE = """# Paper Inbox
 
 This is a staging area for arXiv papers pulled automatically by `scripts/fetch_papers.py`.
@@ -205,6 +241,7 @@ def parse_entry(entry):
         "authors": authors,
         "year": year,
         "abstract": truncate(summary, 220),
+        "abstract_full": summary,
     }
 
 
@@ -307,6 +344,7 @@ def main():
     for i, (key, (title, phrase_query)) in enumerate(sections):
         section_num = int(key.split("-")[0])
         query = build_query(phrase_query)
+        post_filter = SECTION_POST_FILTERS.get(key)
         try:
             records = fetch_section(query, args.max_per_section)
         except (urllib.error.URLError, OSError, ET.ParseError) as exc:
@@ -318,6 +356,8 @@ def main():
             if normalize_title(record["title"]) in existing_titles:
                 continue
             if record["id"] in seen_ids or record["id"] in run_seen_ids:
+                continue
+            if post_filter and not post_filter(record["abstract_full"].lower()):
                 continue
             run_seen_ids.add(record["id"])
             accepted.append(record)
