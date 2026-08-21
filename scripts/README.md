@@ -45,6 +45,20 @@ This threshold comes from the actual Aug 2026 triage data: most sections landed
 naturally in an 11-22% rejection range, while §4, §7, and §8 were clear outliers at
 40-75% — see issue #3 for the full per-section breakdown and tuning history.
 
+**§6 (In-Context Learning) is a deliberate exception left untuned.** Its Aug 2026
+baseline landed at 22% (4/18) — just over the bar, but unlike §4/§7/§8 there's no
+single dominant noise term to point at, so a speculative query change risks cutting
+good candidates on a guess rather than a diagnosed cause. Treated as within normal
+sampling noise for n=18 rather than tightened; its trusted-bar clock restarts from
+the next `--dry-run` pass rather than being backdated to the 22% run.
+
+Separately: because `SECTION_QUERIES` entries are evaluated in dict order and a
+candidate is credited to whichever section's query matches it first (see the
+intra-run dedup note above), §6 tends to lose a chunk of its own matches to §3 and
+§5 in a full multi-section run whenever a candidate's abstract satisfies more than
+one section's query. Use `--section 06` in isolation for a representative read on
+this section specifically.
+
 ## Not built yet
 
 A scheduled GitHub Action (weekly cron, runs `fetch_papers.py`, opens a PR via
