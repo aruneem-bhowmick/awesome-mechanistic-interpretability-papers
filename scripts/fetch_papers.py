@@ -51,7 +51,7 @@ SECTION_QUERIES = {
         "Representation Geometry & Linear Structure",
         'abs:"linear representation hypothesis" OR abs:"representation geometry" '
         'OR abs:"emergent world representation" '
-        'OR (abs:"linear probe" AND (abs:"language model" OR abs:"neural network"))',
+        'OR (abs:"linear probe" AND abs:"interpretability")',
     ),
     "05-causal-methods": (
         "Causal Methods: Patching, Ablation, Editing",
@@ -105,6 +105,12 @@ SECTION_POST_FILTERS = {
                 for term in ("neural network", "language model", "feature")
             )
         )
+    ),
+    "04-representation-geometry": lambda abstract: (
+        "linear representation hypothesis" in abstract
+        or "representation geometry" in abstract
+        or "emergent world representation" in abstract
+        or ("linear probe" in abstract and "interpretability" in abstract)
     ),
     "07-training-dynamics-and-grokking": lambda abstract: (
         "grokking" in abstract
