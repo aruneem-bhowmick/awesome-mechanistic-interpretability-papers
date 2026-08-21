@@ -68,9 +68,9 @@ SECTION_QUERIES = {
     ),
     "08-scaling-and-automated-interp": (
         "Scaling Interpretability & Automated Interp",
-        '(abs:"automated interpretability" OR abs:"scaling interpretability") '
-        'AND (abs:"language model" OR abs:"neural network" OR abs:"transformer") '
-        'OR abs:"autointerp" OR abs:"neuron explanation"',
+        '(abs:"automated interpretability" OR abs:"scaling interpretability" '
+        'OR abs:"autointerp" OR abs:"neuron explanation") '
+        'AND (abs:"language model" OR abs:"neural network" OR abs:"transformer")',
     ),
     "09-applications-safety": (
         "Applications: Safety, Steering, Unlearning",
