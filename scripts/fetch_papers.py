@@ -38,7 +38,8 @@ REQUEST_DELAY_SECONDS = 3
 SECTION_QUERIES = {
     "02-circuits-and-features": (
         "Circuits & Features",
-        'abs:"circuit discovery" OR abs:"circuit analysis" OR abs:"attention circuit"',
+        'abs:"circuit discovery" OR abs:"attention circuit" '
+        'OR (abs:"circuit analysis" AND abs:"interpretability")',
     ),
     "03-superposition-and-saes": (
         "Superposition & Sparse Autoencoders",
@@ -85,6 +86,11 @@ SECTION_QUERIES = {
 # strings server-side, so sections whose noise didn't improve after tightening
 # the query re-check the actual returned abstract text here before accepting.
 SECTION_POST_FILTERS = {
+    "02-circuits-and-features": lambda abstract: (
+        "circuit discovery" in abstract
+        or "attention circuit" in abstract
+        or ("circuit analysis" in abstract and "interpretability" in abstract)
+    ),
     "07-training-dynamics-and-grokking": lambda abstract: (
         "grokking" in abstract
         and any(
