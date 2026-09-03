@@ -57,7 +57,7 @@ SECTION_QUERIES = {
     "05-causal-methods": (
         "Causal Methods: Patching, Ablation, Editing",
         'abs:"activation patching" OR abs:"causal tracing" OR abs:"activation steering" '
-        'OR abs:"model editing"',
+        'OR abs:"model editing" OR abs:"knowledge editing"',
     ),
     "06-in-context-learning": (
         "In-Context Learning & Attention Circuits",
@@ -120,6 +120,7 @@ SECTION_POST_FILTERS = {
             "causal tracing",
             "activation steering",
             "model editing",
+            "knowledge editing",
         )
     ),
     "07-training-dynamics-and-grokking": lambda abstract: (
