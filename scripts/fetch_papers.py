@@ -43,13 +43,14 @@ SECTION_QUERIES = {
     ),
     "03-superposition-and-saes": (
         "Superposition & Sparse Autoencoders",
-        'abs:"sparse autoencoder" '
-        'OR (abs:"dictionary learning" AND (abs:"language model" OR abs:"interpretability")) '
-        'OR (abs:"superposition" AND (abs:"neural network" OR abs:"language model" OR abs:"feature"))',
+        '(abs:"sparse autoencoder" AND (abs:"language model" OR abs:"interpretability")) '
+        'OR (abs:"dictionary learning" AND abs:"interpretability") '
+        'OR (abs:"superposition" AND (abs:"neural network" OR abs:"interpretability"))',
     ),
     "04-representation-geometry": (
         "Representation Geometry & Linear Structure",
-        'abs:"linear representation hypothesis" OR abs:"representation geometry" '
+        'abs:"linear representation hypothesis" '
+        'OR (abs:"representation geometry" AND (abs:"language model" OR abs:"interpretability")) '
         'OR abs:"emergent world representation" '
         'OR (abs:"linear probe" AND abs:"interpretability")',
     ),
@@ -93,22 +94,22 @@ SECTION_POST_FILTERS = {
         or ("circuit analysis" in abstract and "interpretability" in abstract)
     ),
     "03-superposition-and-saes": lambda abstract: (
-        "sparse autoencoder" in abstract
-        or (
-            "dictionary learning" in abstract
+        (
+            "sparse autoencoder" in abstract
             and any(term in abstract for term in ("language model", "interpretability"))
         )
+        or ("dictionary learning" in abstract and "interpretability" in abstract)
         or (
             "superposition" in abstract
-            and any(
-                term in abstract
-                for term in ("neural network", "language model", "feature")
-            )
+            and any(term in abstract for term in ("neural network", "interpretability"))
         )
     ),
     "04-representation-geometry": lambda abstract: (
         "linear representation hypothesis" in abstract
-        or "representation geometry" in abstract
+        or (
+            "representation geometry" in abstract
+            and any(term in abstract for term in ("language model", "interpretability"))
+        )
         or "emergent world representation" in abstract
         or ("linear probe" in abstract and "interpretability" in abstract)
     ),
@@ -147,6 +148,15 @@ SECTION_POST_FILTERS = {
         and any(
             term in abstract
             for term in ("language model", "neural network", "transformer")
+        )
+    ),
+    "09-applications-safety": lambda abstract: any(
+        term in abstract
+        for term in (
+            "representation engineering",
+            "machine unlearning",
+            "refusal direction",
+            "activation addition",
         )
     ),
 }
@@ -209,6 +219,13 @@ def normalize_title(title):
     t = NON_ALNUM_RE.sub("", t)
     t = WHITESPACE_RE.sub(" ", t).strip()
     return t
+
+
+def normalize_for_phrase_match(text):
+    # Abstracts sometimes hyphenate a tracked phrase when it's used attributively
+    # (e.g. "six open-weight language-model families"), which a plain substring
+    # check against "language model" would silently miss (issue #3).
+    return text.lower().replace("-", " ")
 
 
 def load_existing_titles(readme_path):
@@ -393,7 +410,7 @@ def main():
                 continue
             if record["id"] in seen_ids or record["id"] in run_seen_ids:
                 continue
-            if post_filter and not post_filter(record["abstract_full"].lower()):
+            if post_filter and not post_filter(normalize_for_phrase_match(record["abstract_full"])):
                 continue
             run_seen_ids.add(record["id"])
             accepted.append(record)
